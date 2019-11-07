@@ -1,8 +1,14 @@
 import requests
 import bs4
 
-URL = "https://www.amazon.co.uk/dp/B07XRC3BBG/ref=dp_cerb_1"
-page = requests.get(URL, headers = {"User-Agent":"Undefined"})
-soup = bs4.BeautifulSoup(page.content,"html.parser")
-priceInfo = soup.find(id="priceblock_saleprice").get_text()
-print(priceInfo)
+def webscrape(webURL):
+    URL = webURL
+    page = requests.get(URL, headers = {"User-Agent":"Undefined"})
+    soup = bs4.BeautifulSoup(page.content,"html.parser")
+    try:
+        priceInfo = soup.find(id="priceblock_saleprice").get_text()
+    except:
+        try: priceInfo = soup.find(id="priceblock_ourprice").get_text()
+        except:
+            print("Olete sisestanud vale URLi, proovige uuesti")
+    return (priceInfo)
