@@ -1,26 +1,25 @@
 import tkinter as tk
 from PIL import ImageTk, Image
 
+
 def userInterface():
     main = tk.Tk()
     main["bg"] = "#FFFFFF"
+    main.geometry("600x400")
 
-
-    rootWidth = main.winfo_width()
-    rootHeight = main.winfo_height()
-    canvas = tk.Canvas(main,cursor="leftbutton", width=rootWidth + 500, height=rootHeight+300, bg="#9CBEC1", confine=True)
-    entry = tk.Entry(main)
-    background = ImageTk.PhotoImage(Image.open("UIbackground.png"))
+    canvas = tk.Canvas(main, width=main.winfo_width() * 600, height=main.winfo_height() * 400, bg="#25FE34")
+    background = ImageTk.PhotoImage(Image.open("UIbackground.png").resize((600, 450)))
     background_label = tk.Label(canvas, image=background)
-    background_label.place(x=0, y=0, relwidth=1, relheight=1)
+    background_label.place(x=0, y=0, relwidth=1, relheight=1.0)
 
-    entry.insert(0, "neti.ee")
+    URLentry = tk.Entry(canvas, width=50, bd=0)
+    URLentry.insert(0, "neti.ee")
 
-    entry.pack()
-    canvas.pack(expand=True)
+    URLentry.place(x=150, y=100)
+    canvas.place(x=0, y=0)
     main.minsize(600, 400)
     main.maxsize(600, 400)
     main.mainloop()
 
-userInterface()
 
+userInterface()
