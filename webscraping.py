@@ -16,8 +16,8 @@ def germanTranslator(word):
 def webscrape(URL):
     productInfo = {}
     headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"}
-    existanceChecker = requests.get(URL)
-    if existanceChecker.status_code == 200:
+    existenceChecker = requests.get(URL)
+    if existenceChecker.status_code == 200:
         page = requests.get(URL,headers=headers)
 
         time.sleep(2)
@@ -31,9 +31,13 @@ def webscrape(URL):
         try:
             productPrice = soup.find(id="priceblock_ourprice").get_text()
         except:
-            try: productPrice = soup.find(id="priceblock_dealprice").get_text()
 
-            except: return("Sisestatud URL millel puudub hind.")
+            try:
+                productPrice = soup.find(id="priceblock_dealprice").get_text()
+
+            except:
+                return("Sisestatud URL millel puudub hind.")
+
         #adding all the needed info to productInfo
         productAvailability = germanTranslator(productAvailability)
         productInfo["availability"] = productAvailability
