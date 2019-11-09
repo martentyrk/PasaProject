@@ -1,4 +1,5 @@
 import tkinter as tk
+from PIL import ImageTk, Image
 
 def userInterface():
     main = tk.Tk()
@@ -9,7 +10,7 @@ def userInterface():
     rootHeight = main.winfo_height()
     canvas = tk.Canvas(main,cursor="leftbutton", width=rootWidth + 500, height=rootHeight+300, bg="#9CBEC1", confine=True)
     entry = tk.Entry(main)
-    background = tk.PhotoImage(file="UIbackground.png")
+    background = ImageTk.PhotoImage(Image.open("UIbackground.png"))
     background_label = tk.Label(canvas, image=background)
     background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
