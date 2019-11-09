@@ -1,6 +1,6 @@
 import tkinter as tk
 
-def UserInterface():
+def userInterface():
     main = tk.Tk()
     main["bg"] = "#FFFFFF"
 

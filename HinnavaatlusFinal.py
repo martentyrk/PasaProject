@@ -1,5 +1,5 @@
 from emailSendLogic import emailSender
-from UI import *
+from UI import userInterface
 from webscraping import webscrape
 
 webURL = input("Sisestage Amazoni lehe toote URL, mida soovite lisada hinnavaatlusesse: ")
