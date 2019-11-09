@@ -1,9 +1,36 @@
 import requests
 import bs4
+import time
+def webscrape(URL, titleOrPrice):
+    if titleOrPrice == "title":
+        headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"}
 
-URL = "https://www.amazon.de/Bloodborne-Game-Year-PlayStation-4/dp/B016ZU4FIQ/ref=sr_1_3?ie=UTF8&qid=1519566642&sr=8-3&keywords=bloodborne+ps4"
-page = requests.get(URL,headers={"User-Agent":"Defined"})
-soup = bs4.BeautifulSoup(page.content, "html.parser")
-price = soup.find(id="priceblock_ourprice").get_text()
-print(price)
+        page = requests.get(URL,headers=headers)
 
+        time.sleep(2)
+        soup = bs4.BeautifulSoup(page.content, "html.parser")
+        time.sleep(5)
+        productTitle = soup.find(id="productTitle").get_text()
+
+        return productTitle
+
+    elif titleOrPrice == "price":
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"}
+
+        page = requests.get(URL, headers=headers)
+
+        time.sleep(2)
+        soup = bs4.BeautifulSoup(page.content, "html.parser")
+        time.sleep(5)
+        try:
+            productPrice = soup.find(id="priceblock_ourprice").get_text()
+        except:
+            try: productPrice = soup.find(id="priceblock_dealprice").get_text()
+
+            except:
+                try:
+                    productPrice = soup.find(id="priceblock_dealprice").get_text()
+                except: return("Sisestatud vale hind")
+
+        return (productPrice)
