@@ -1,0 +1,5 @@
+Tahame teha programmi, millesse saab kasutaja sisestada valitud Amazoni toote linki ning seejärel hakkab programm jälgima selle toote hinda. Kui hind peaks vahepeal muutuma, siis saadab programm kasutajale meili koos toote nime, uue hinna ja eelmise hinnaga. 
+
+Hetkel oleme valmis teinud esialgse UI, programmi, mis saadab kasutajale meile ja algse webscrapingu. 
+
+Tulevikus teeme UI ilusamaks, lisame veel erinevaid andmeid toote kohta, mis meiliga kaasa tulevad, erinevad e-poode, mille tooteid jälgida ning proovime lõpuks projekti laadida cloudi, et programm töötaks serveris, mitte ei peaks koormama arvutit. Seda selleks, et programm töötaks isegi siis kui arvuti on välja lülitatud.
