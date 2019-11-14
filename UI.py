@@ -2,11 +2,11 @@ import tkinter as tk
 from PIL import ImageTk, Image
 import webscraping as web
 
-#info = web.webscrape("https://www.amazon.com/PlayStation-4-Slim-1TB-Console/dp/B071CV8CG2/ref=sr_1_1?keywords=playstation+4&qid=1573324821&sr=8-1")
+info = web.webscrape("https://www.amazon.com/PlayStation-4-Slim-1TB-Console/dp/B071CV8CG2/ref=sr_1_1?keywords=playstation+4&qid=1573324821&sr=8-1")
+print(info)
 
+productinfo_string = "TERE"
 
-
-productinfo_string = "Tere"
 
 def userInterface():
     main = tk.Tk()
