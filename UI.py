@@ -4,9 +4,12 @@ import webscraping as web
 
 info = web.webscrape("https://www.amazon.com/PlayStation-4-Slim-1TB-Console/dp/B071CV8CG2/ref=sr_1_1?keywords=playstation+4&qid=1573324821&sr=8-1")
 print(info)
+<<<<<<< HEAD
+=======
 
+productinfo_string = "TERE"
+>>>>>>> 1219c59ba1695b4126fd5f471eee6ccdabdde951
 
-productinfo_string = "Tere"
 
 def userInterface():
     main = tk.Tk()
