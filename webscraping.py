@@ -46,7 +46,7 @@ def webscrape(URL):
             return ("Sisestatud URL millel puudub hind.")
     # adding all the needed info to productInfo
     productAvailability = germanTranslator(productAvailability)
+    productInfo["title"] = productTitle
     productInfo["availability"] = productAvailability
     productInfo["price"] = productPrice
-    productInfo["title"] = productTitle
     return productInfo
