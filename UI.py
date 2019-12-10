@@ -2,12 +2,19 @@ import tkinter as tk
 from PIL import ImageTk, Image
 import webscraping as web
 
-info = web.webscrape("https://www.amazon.com/PlayStation-4-Slim-1TB-Console/dp/B071CV8CG2/ref=sr_1_1?keywords=playstation+4&qid=1573324821&sr=8-1")
-print(info)
-
-productinfo_string = "TERE"
 
 
+productinfo_string = ""
+
+def get_info():
+    global productinfo_string
+    info = web.webscrape("https://www.amazon.com/PlayStation-4-Slim-1TB-Console/dp/B071CV8CG2/ref=sr_1_1?keywords=playstation+4&qid=1573324821&sr=8-1")
+    for k, v in info.items():
+        productinfo_string += k + ": " + v + '\n'
+
+def wr():
+    global productinfo_string
+    productinfo_string = "Oota"
 def userInterface():
     main = tk.Tk()
     main["bg"] = "#FFFFFF"
@@ -24,7 +31,7 @@ def userInterface():
     URLentry = tk.Entry(canvas, width=50, bd=0)
     URLentry.insert(0, "neti.ee")
 
-    get_info_button = tk.Button(canvas, text="Get info", width=10)
+    get_info_button = tk.Button(canvas, text="Get info", width=10, command=wr())
     track_button = tk.Button(canvas, text="Track", width=10)
 
     productinfo_label.place(x=150, y=200)
