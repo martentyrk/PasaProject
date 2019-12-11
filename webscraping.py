@@ -1,8 +1,5 @@
 import requests
 import bs4
-import time
-import html5lib
-
 
 # translator for amazon.de availability
 def germanTranslator(word):
@@ -25,9 +22,6 @@ def webscrape(URL):
 
 
     soup = bs4.BeautifulSoup(page.content, "html5lib")
-
-
-    #comments = soup.find_all(string=lambda text: isinstance(text, Comment))
 
     # added time.sleep so that we would not be recognized as robots
 
