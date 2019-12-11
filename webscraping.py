@@ -25,9 +25,6 @@ def webscrape(URL):
     print(page)
     soup = bs4.BeautifulSoup(page.content, "html5lib")
 
-
-    #comments = soup.find_all(string=lambda text: isinstance(text, Comment))
-
     # added time.sleep so that we would not be recognized as robots
 
     productTitle = soup.find(id="productTitle").get_text().strip()
