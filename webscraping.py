@@ -41,7 +41,10 @@ def webscrape(URL):
             try:
                 productAvailability = soup.find("p", class_="a-spacing-micro a-color-secondary a-text-bold").text.strip()
             except:
-                productAvailability = ""
+                try:
+                    productAvailability = soup.find("span", class_="a-size-medium a-color-success").text.strip()
+                except:
+                    productAvailability = ""
 
         # getting product productTitle and productAvailability status
         # trying different id tags because different products have different ids depending on sale
@@ -55,9 +58,9 @@ def webscrape(URL):
                 return ("Sisestatud URL millel puudub hind.")
         # adding all the needed info to productInfo
         productAvailability = germanTranslator(productAvailability)
-        productInfo["availability"] = productAvailability
-        productInfo["price"] = productPrice
         productInfo["title"] = productTitle
+        productInfo["price"] = productPrice
+        productInfo["availability"] = productAvailability
 
         return(productInfo)
 
@@ -97,9 +100,4 @@ def webscrape(URL):
         return(productInfo)
 
     else:
-<<<<<<< HEAD
         return("Please use an amazon or ebay website")
-=======
-        return("Please use an amazon or ebay website")
-
->>>>>>> 2ee87e289abfc4e963a7c1e8ad002c4561296a6a
