@@ -1,7 +1,7 @@
 import tkinter as tk
 from PIL import ImageTk, Image
 import webscraping as web
-
+import re
 
 def get_info():
     try:
@@ -10,8 +10,21 @@ def get_info():
     except:
         productinfo_string.set("Can't parse this URL")
 
+def track():
+    if re.search(".*@.*\.", emailentry.get()) != None:
+        productinfo_string.set(emailentry.get())
+    else:
+        productinfo_string.set("Faulty email")
+
+def clearUrl(event):
+    URLentry.delete(0, 'end')
+
+
+def clearEmail(event):
+    emailentry.delete(0, 'end')
 
 main = tk.Tk()
+
 main["bg"] = "#FFFFFF"
 main.geometry("600x400")
 main.title("Price tracker")
@@ -23,19 +36,26 @@ background_label = tk.Label(canvas, image=background)
 background_label.place(x=0, y=0, relwidth=1, relheight=1.0)
 
 URLentry = tk.Entry(canvas, width=50, bd=0)
+emailentry = tk.Entry(canvas, width=25)
+emailentry.insert(0, "Your e-mail")
+URLentry.insert(0, "URL goes here")
+
+URLentry.bind('<Button-1>', clearUrl)
+emailentry.bind('<Button-1>', clearEmail)
 
 productinfo_label = tk.Label(canvas, bg="#FFFFFF", width=65, height=15, wraplength=400, textvariable=productinfo_string)
 
-URLentry.insert(0, "neti.ee")
-
 get_info_button = tk.Button(canvas, text="Get info", width=10, command=get_info)
-track_button = tk.Button(canvas, text="Track", width=10)
+track_button = tk.Button(canvas, text="Track", width=10, command=track)
+
 
 productinfo_label.place(x=175, y=300)
 track_button.place(x=370, y=250)
 get_info_button.place(x=370, y=200)
 URLentry.place(x=250, y=150)
+emailentry.place(x=460, y=250)
 canvas.place(x=0, y=0)
 main.minsize(800, 600)
 main.maxsize(800, 600)
+
 main.mainloop()

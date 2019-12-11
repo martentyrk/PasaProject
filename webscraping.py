@@ -1,8 +1,5 @@
 import requests
 import bs4
-import time
-import html5lib
-
 
 # translator for amazon.de availability
 def germanTranslator(word):
