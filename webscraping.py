@@ -98,5 +98,3 @@ def webscrape(URL):
 
     else:
         return("Please use an amazon or ebay website")
-
-#adding a comment siim siim siim
