@@ -97,4 +97,9 @@ def webscrape(URL):
         return(productInfo)
 
     else:
+<<<<<<< HEAD
         return("Please use an amazon or ebay website")
+=======
+        return("Please use an amazon or ebay website")
+
+>>>>>>> 2ee87e289abfc4e963a7c1e8ad002c4561296a6a

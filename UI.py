@@ -19,7 +19,6 @@ def track():
 def clearUrl(event):
     URLentry.delete(0, 'end')
 
-
 def clearEmail(event):
     emailentry.delete(0, 'end')
 
@@ -53,7 +52,7 @@ productinfo_label.place(x=175, y=300)
 track_button.place(x=370, y=250)
 get_info_button.place(x=370, y=200)
 URLentry.place(x=250, y=150)
-emailentry.place(x=460, y=250)
+emailentry.place(x=500, y=250)
 canvas.place(x=0, y=0)
 main.minsize(800, 600)
 main.maxsize(800, 600)
