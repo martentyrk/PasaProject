@@ -1,6 +1,6 @@
 import requests
 import bs4
-
+import emailSendLogic
 # translator for amazon.de availability
 def germanTranslator(word):
     if word == "Auf lager.":
@@ -129,3 +129,14 @@ def webscrape(URL):
 
     else:
         return("Please use an amazon, ebay or a bluetomato website")
+
+def checkSend(prices, url, email):
+    info = webscrape(url)
+    price = info['price']
+    price = float(price[1: len(price)])
+    prices.append(price)
+    if len(prices) > 2:
+        prices.pop(0)
+    if len(prices) > 2:
+        if prices[1] < prices[0]:
+            emailSendLogic.emailSender("Webscrape","The price of{0} has gone from {1} to {2}".format(info['title'], prices[0], prices[1]),email)

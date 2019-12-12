@@ -2,9 +2,6 @@
 #password: projectpasa123
 #appPassword: lzrrolwzktcylhbc
 
-#peaks võibolla ehitama üles nii et saadame meili
-#HTMLi look'iga. Näeb parem välja ja rohkem customizable
-#https://www.youtube.com/watch?v=JRCJ6RtE3xU selle abil tegin, HTML osa on 29:55
 
 import smtplib
 from email.message import EmailMessage
