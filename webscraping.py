@@ -1,7 +1,6 @@
 import requests
 import bs4
-from random import randint
-
+import emailSendLogic
 # translator for amazon.de availability
 def germanTranslator(word):
     if word == "Auf lager.":
@@ -27,7 +26,7 @@ def webscrape(URL):
     # added time.sleep so that we would not be recognized as robots
 
 #Amazoni kohta webscrape
-    if "amazon" in URL:
+    if "https://www.amazon" in URL:
         try:
             productTitle = soup.find(id="productTitle").get_text().strip()
         except:
@@ -66,7 +65,7 @@ def webscrape(URL):
         return(productInfo)
 
 #Ebay scanner
-    if "ebay" in URL:
+    elif "https://www.ebay" in URL:
         #getting the productTitle and removing a small part from it.
         try:
             h1 = soup.find("h1", id="itemTitle").find("span").get_text()
@@ -99,18 +98,45 @@ def webscrape(URL):
             productInfo["availability"] = " "
 
         return(productInfo)
+    elif "https://www.blue-tomato" in URL:
+
+        #getting the title
+        try:
+            productTitle = soup.find("span", id="variantName").get_text().strip()
+            productInfo["title"] = productTitle
+        except:
+            productInfo["title"] = ""
+
+        #getting the price
+        try:
+            productPrice = soup.find("span", class_="c-details-box__price-current").get_text().strip().split()
+            productPrice[0],productPrice[1] = productPrice[1],productPrice[0]
+            productPrice = " ".join(productPrice)
+            productInfo["price"] = productPrice
+        except:
+            productInfo["price"] = ""
+
+        #getting the time of delivery
+        try:
+            productDelivery = soup.find("span", class_="c-details-box__availability s-availability-shoptext green").get_text().strip().split()
+            productDelivery = " ".join(productDelivery[0:2])+ ":", " ".join(productDelivery[2:-1])
+            productDelivery = " ".join(productDelivery)
+            productInfo["delivery"] = productDelivery
+        except:
+            productInfo["delivery"] = " "
+
+        return productInfo
 
     else:
-        return("Please use an amazon or ebay website")
+        return("Please use an amazon, ebay or a bluetomato website")
 
-
-
-def checkSend(prices, url):
-    price = webscrape(url)['price']
+def checkSend(prices, url, email):
+    info = webscrape(url)
+    price = info['price']
     price = float(price[1: len(price)])
     prices.append(price)
     if len(prices) > 2:
         prices.pop(0)
-    if prices[1] < prices[0]:
-        print("hind langes")
-    print(prices)
+    if len(prices) > 2:
+        if prices[1] < prices[0]:
+            print("Webscrape","The price of{0} has gone from {1} to {2}".format(info['title'], prices[0], prices[1]),email)

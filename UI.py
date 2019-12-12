@@ -15,10 +15,12 @@ def get_info():
 
 def track():
     global url
+    global email
     if re.search(".*@.*\.", emailentry.get()) != None:
         productinfo_string.set(emailentry.get() + "tracking")
         print("Now Tracking")
         url = URLentry.get()
+        email = emailentry.get()
         quit()
     else:
         productinfo_string.set("Faulty email")
@@ -72,12 +74,12 @@ main.mainloop()
 
 prices = []
 
-schedule.every(2).seconds.do(web.checkSend, prices, url)
+schedule.every(2).hours.do(web.checkSend, prices, url, email)
 
 while True:
-    try:
-        schedule.run_pending()
-    except:
+   try:
+    schedule.run_pending()
+   except:
         print("Invalid URL or e-mail")
         print("Tracking stopped")
         break
