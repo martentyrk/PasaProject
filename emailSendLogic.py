@@ -21,3 +21,10 @@ def emailSender(subject,body,addresstoWho):
         smtp.send_message(msg)
 
 
+l = [3, 4, 5]
+
+l.append(100)
+
+print(l)
+
+

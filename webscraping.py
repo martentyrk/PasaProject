@@ -1,5 +1,6 @@
 import requests
 import bs4
+from random import randint
 
 # translator for amazon.de availability
 def germanTranslator(word):
@@ -101,3 +102,15 @@ def webscrape(URL):
 
     else:
         return("Please use an amazon or ebay website")
+
+
+
+def checkSend(prices, url):
+    price = webscrape(url)['price']
+    price = float(price[1: len(price)])
+    prices.append(price)
+    if len(prices) > 2:
+        prices.pop(0)
+    if prices[1] < prices[0]:
+        print("hind langes")
+    print(prices)

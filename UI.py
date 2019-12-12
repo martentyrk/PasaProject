@@ -2,6 +2,9 @@ import tkinter as tk
 from PIL import ImageTk, Image
 import webscraping as web
 import re
+import schedule
+import time
+
 
 def get_info():
     try:
@@ -11,8 +14,12 @@ def get_info():
         productinfo_string.set("Can't parse this URL")
 
 def track():
+    global url
     if re.search(".*@.*\.", emailentry.get()) != None:
-        productinfo_string.set(emailentry.get())
+        productinfo_string.set(emailentry.get() + "tracking")
+        print("Now Tracking")
+        url = URLentry.get()
+        quit()
     else:
         productinfo_string.set("Faulty email")
 
@@ -22,8 +29,13 @@ def clearUrl(event):
 def clearEmail(event):
     emailentry.delete(0, 'end')
 
-main = tk.Tk()
+def quit():
+    global main
+    main.destroy()
 
+
+
+main = tk.Tk()
 main["bg"] = "#FFFFFF"
 main.geometry("600x400")
 main.title("Price tracker")
@@ -47,7 +59,6 @@ productinfo_label = tk.Label(canvas, bg="#FFFFFF", width=65, height=15, wrapleng
 get_info_button = tk.Button(canvas, text="Get info", width=10, command=get_info)
 track_button = tk.Button(canvas, text="Track", width=10, command=track)
 
-
 productinfo_label.place(x=175, y=300)
 track_button.place(x=370, y=250)
 get_info_button.place(x=370, y=200)
@@ -58,3 +69,15 @@ main.minsize(800, 600)
 main.maxsize(800, 600)
 
 main.mainloop()
+
+prices = []
+
+schedule.every(2).seconds.do(web.checkSend, prices, url)
+
+while True:
+    try:
+        schedule.run_pending()
+    except:
+        print("Invalid URL or e-mail")
+        print("Tracking stopped")
+        break
