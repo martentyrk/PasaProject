@@ -16,13 +16,16 @@ def track():
     global url
     global email
     if re.search(".*@.*\.", emailentry.get()) != None:
-        productinfo_string.set(emailentry.get() + "tracking")
-        print("Now Tracking")
-        info = web.webscrape(URLentry.get())
-        url = URLentry.get()
-        email = emailentry.get()
-        emailSendLogic.emailSender("Pasa hinnavaatlus", "We started tracking your product: {0}".format(info["title"]), email)
-        quit()
+        try:
+            info = web.webscrape(URLentry.get())
+            productinfo_string.set(emailentry.get() + "tracking")
+            print("Now Tracking")
+            url = URLentry.get()
+            email = emailentry.get()
+            emailSendLogic.emailSender("Pasa hinnavaatlus", "We started tracking your product: {0}".format(info["title"]), email)
+            quit()
+        except:
+            productinfo_string.set("Can't parse this URL")
     else:
         productinfo_string.set("Faulty email")
 
