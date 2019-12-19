@@ -8,6 +8,7 @@ import emailSendLogic
 def get_info():
     try:
         info = web.webscrape(URLentry.get())
+        print(info)
         productinfo_string.set('\n'.join(['{0} : {1}'.format(k, v) for k, v in info.items()]))
     except:
         productinfo_string.set("Can't parse this URL")
@@ -16,9 +17,9 @@ def track():
     global url
     global email
     if re.search(".*@.*\.", emailentry.get()) != None:
-        productinfo_string.set(emailentry.get() + "tracking")
-        print("Now Tracking")
         info = web.webscrape(URLentry.get())
+        productinfo_string.set("tracking")
+        print("Now Tracking")
         url = URLentry.get()
         email = emailentry.get()
         emailSendLogic.emailSender("Pasa hinnavaatlus", "We started tracking your product: {0}".format(info["title"]), email)
