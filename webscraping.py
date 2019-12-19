@@ -44,12 +44,15 @@ def webscrape(URL):
                 try:
                     productAvailability = soup.find("span", class_="a-size-medium a-color-success").text.strip()
                 except:
-                    productAvailability = ""
+                    try:
+                        productAvailability = soup.find("div", id="availability").text.strip()
+                    except:
+                        productAvailability = ""
 
         # getting product productTitle and productAvailability status
         # trying different id tags because different products have different ids depending on sale
         try:
-            productPrice = soup.find(id="priceblock_ourprice").get_text()
+            productPrice = soup.find(id="priceblock_ourprice").get_text().strip()
         except:
             try:
                 productPrice = soup.find(id="priceblock_dealprice").get_text()
